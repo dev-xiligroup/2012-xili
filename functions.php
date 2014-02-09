@@ -9,8 +9,9 @@
 // 2013-02-23 - 1.2 - based on new class since xili-language 2.8.8+
 // 2013-07-17 - 1.2.1 - based on updated class since xili-language 2.8.10+
 // 2013-11-12 - 1.3.1 - as parent version - updated with class of 2.9.10+ - fixes header loop
+// 2014-02-09 - 1.3.2 - as parent version - updated with new class of 2.10.0+
 
-define( 'TWENTYTWELVE_XILI_VER', '1.3.1'); // as style.css
+define( 'TWENTYTWELVE_XILI_VER', '1.3.2'); // as style.css
 
 function twentytwelve_xilidev_setup () {
 
@@ -20,7 +21,7 @@ function twentytwelve_xilidev_setup () {
 
 	$xl_required_version = false;
 
-	$minimum_xl_version = '2.9.9';
+	$minimum_xl_version = '2.9.99';
 
 	if ( class_exists('xili_language') ) { // if temporary disabled
 
