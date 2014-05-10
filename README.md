@@ -1,9 +1,9 @@
 2012-xili
 =========
 
-Multilingual child theme of Twenty Twelve, one the embedded themes of WordPress : TwentyTwelve-xili v. 1.3.2
+Multilingual child theme of Twenty Twelve, one the embedded themes of WordPress : TwentyTwelve-xili v. 1.4.0
 
-Master Branch is reserved for latest version of xili-language 2.10.0
+Master Branch is reserved for latest version of xili-language 2.12.0
 
 This example is visible (and documented) here
 
@@ -15,6 +15,6 @@ After installation or updating, it is fully recommanded to refresh permalinks.
 
 Before updating don't forgot to keep a backup of the current languages files (.mo) in child sub-folder.
 
-2014-02-09
+2014-05-10
 
 M.

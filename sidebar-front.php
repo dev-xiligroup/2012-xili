@@ -15,15 +15,15 @@
  *
  * If none of the sidebars have widgets, then let's bail early.
  */
-if ( class_exists('xili_language') ) { 
-	$options = get_theme_xili_options(); 
-	$curlang = ( the_curlang() == 'en_us' || the_curlang() == "" ) ? '' : '_'.the_curlang()  ;
+if ( class_exists('xili_language') ) {
+	$options = get_theme_xili_options();
+	$curlang = ( the_curlang() == 'en_us' || the_curlang() == "" ) ? '' : '_'.the_curlang() ;
 
-	$curlang2 = ( $curlang != '' && !isset( $options['sidebar_'.'sidebar-2'] ) ) ? '' : $curlang ; //display default  - no clone
-	$curlang3 = ( $curlang != '' && !isset( $options['sidebar_'.'sidebar-3'] ) ) ? '' : $curlang ; //display default  - no clone 
+	$curlang2 = ( $curlang != '' && !isset( $options['sidebar_'.'sidebar-2'] ) ) ? '' : $curlang ; //display default - no clone
+	$curlang3 = ( $curlang != '' && !isset( $options['sidebar_'.'sidebar-3'] ) ) ? '' : $curlang ; //display default - no clone
 } else {
- 	$curlang2 = '' ;
- 	$curlang3 = '' ;
+	$curlang2 = '' ;
+	$curlang3 = '' ;
 }
 if ( ! is_active_sidebar( 'sidebar-2'. $curlang2 ) && ! is_active_sidebar( 'sidebar-3'. $curlang3 ) )
 	return;

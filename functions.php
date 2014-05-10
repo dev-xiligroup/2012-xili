@@ -10,8 +10,9 @@
 // 2013-07-17 - 1.2.1 - based on updated class since xili-language 2.8.10+
 // 2013-11-12 - 1.3.1 - as parent version - updated with class of 2.9.10+ - fixes header loop
 // 2014-02-09 - 1.3.2 - as parent version - updated with new class of 2.10.0+
+// 2014-04-10 - 1.4.0 - as parent version - updated with new class of 2.12.0+
 
-define( 'TWENTYTWELVE_XILI_VER', '1.3.2'); // as style.css
+define( 'TWENTYTWELVE_XILI_VER', '1.4.0'); // as style.css
 
 function twentytwelve_xilidev_setup () {
 
@@ -21,7 +22,7 @@ function twentytwelve_xilidev_setup () {
 
 	$xl_required_version = false;
 
-	$minimum_xl_version = '2.9.99';
+	$minimum_xl_version = '2.11.99';
 
 	if ( class_exists('xili_language') ) { // if temporary disabled
 
@@ -52,11 +53,11 @@ function twentytwelve_xilidev_setup () {
 		global $xili_language_theme_options ; // used on both side
 	// Args dedicaced to this theme named Twenty Thirteen
 		$xili_args = array (
-	 		'customize_clone_widget_containers' => true, // comment or set to true to clone widget containers
-	 		'settings_name' => 'xili_twentytwelve_theme_options', // name of array saved in options table
-	 		'theme_name' => 'Twenty Twelve',
-	 		'theme_domain' => $theme_domain,
-	 		'child_version' => TWENTYTWELVE_XILI_VER
+			'customize_clone_widget_containers' => true, // comment or set to true to clone widget containers
+			'settings_name' => 'xili_twentytwelve_theme_options', // name of array saved in options table
+			'theme_name' => 'Twenty Twelve',
+			'theme_domain' => $theme_domain,
+			'child_version' => TWENTYTWELVE_XILI_VER
 		);
 
 		if ( is_admin() ) {
@@ -64,24 +65,13 @@ function twentytwelve_xilidev_setup () {
 		// Admin args dedicaced to this theme
 
 			$xili_admin_args = array_merge ( $xili_args, array (
-		 		'customize_adds' => true, // add settings in customize page
-		 		'customize_addmenu' => false, // done by 2013
-		 		'capability' => 'edit_theme_options',
-		 		// possible to adapt propagate options - here add post_content to other default values - 2.8.10
-		 		'authoring_options_admin' => true,
-		 		'propagate_options_default' => array( 'post_content' => array ( 'default'=> '0', 'data' => 'post' ),
-		 												'post_excerpt' => array ( 'default'=> '0', 'data' => 'post' )
-		 											),
-		 		'propagate_options' => array (
-							'post_content' => array ('name' => __('Post Content', $theme_domain ),
-							'description' => __('Copy Post Content.', $theme_domain)
-								),
-							'post_excerpt' => array ('name' => __('Post Excerpt', $theme_domain ),
-							'description' => __('Copy Post Excerpt.', $theme_domain)
-								)
-					),
+				'customize_adds' => true, // add settings in customize page
+				'customize_addmenu' => false, // done by 2013
+				'capability' => 'edit_theme_options',
+
+				'authoring_options_admin' => false,
 			) );
-			if ( class_exists ( 'xili_language_theme_options_admin' )  ) {
+			if ( class_exists ( 'xili_language_theme_options_admin' ) ) {
 				$xili_language_theme_options = new xili_language_theme_options_admin ( $xili_admin_args );
 				$class_ok = true ;
 			} else {
@@ -91,13 +81,31 @@ function twentytwelve_xilidev_setup () {
 
 		} else { // visitors side - frontend
 
-			if ( class_exists ( 'xili_language_theme_options' )  ) {
+			if ( class_exists ( 'xili_language_theme_options' ) ) {
 				$xili_language_theme_options = new xili_language_theme_options ( $xili_args );
 				$class_ok = true ;
 			} else {
 				$class_ok = false ;
 			}
 		}
+
+		// new ways to add parameters in authoring propagation
+		add_theme_support('xiliml-authoring-rules', array (
+			'post_content' => array('default' => '1',
+				'data' => 'post',
+				'hidden' => '',
+				'name' => 'Post Content',
+				/* translators: added in child functions by xili */
+				'description' => __('Will copy content in the future translated post', 'twentythirteen')
+		),
+			'post_parent' => array('default' => '1',
+				'data' => 'post',
+				'name' => 'Post Parent',
+				'hidden' => '1',
+				/* translators: added in child functions by xili */
+				'description' => __('Will copy translated parent id (if original has parent and translated parent)!', 'twentythirteen')
+		))
+		); //
 
 		$xili_theme_options = get_theme_xili_options() ;
 		// to collect checked value in xili-options of theme
@@ -113,28 +121,28 @@ function twentytwelve_xilidev_setup () {
 
 		$msg = '
 		<div class="error">
-			<p>' . sprintf ( __('The %s child theme requires xili-language plugin installed and activated', $theme_domain ), get_option( 'current_theme' ) ).'</p>
+			<p>' . sprintf ( __('The %s child theme requires xili-language plugin installed and activated', 'twentytwelve' ), get_option( 'current_theme' ) ).'</p>
 		</div>';
 
-	} elseif ( $class_ok === false )  {
+	} elseif ( $class_ok === false ) {
 
 		$msg = '
 		<div class="error">
-			<p>' . sprintf ( __('The %s child theme requires <em>xili_language_theme_options</em> class to set multilingual features.', $theme_domain ), get_option( 'current_theme' ) ).'</p>
+			<p>' . sprintf ( __('The %s child theme requires <em>xili_language_theme_options</em> class to set multilingual features.', 'twentytwelve' ), get_option( 'current_theme' ) ).'</p>
 		</div>';
 
-	} elseif ( $xl_required_version )  {
+	} elseif ( $xl_required_version ) {
 
 		$msg = '
 		<div class="updated">
-			<p>' . sprintf ( __('The %s child theme was successfully activated with xili-language.', $theme_domain ), get_option( 'current_theme' ) ).'</p>
+			<p>' . sprintf ( __('The %s child theme was successfully activated with xili-language.', 'twentytwelve' ), get_option( 'current_theme' ) ).'</p>
 		</div>';
 
 	} else {
 
 		$msg = '
 		<div class="error">
-			<p>' . sprintf ( __('The %1$s child theme requires xili-language version %2$s+', $theme_domain ), get_option( 'current_theme' ), $minimum_xl_version ).'</p
+			<p>' . sprintf ( __('The %1$s child theme requires xili-language version %2$s+', 'twentytwelve' ), get_option( 'current_theme' ), $minimum_xl_version ).'</p
 		</div>';
 	}
 	// after activation and in themes list
@@ -146,7 +154,7 @@ function twentytwelve_xilidev_setup () {
 }
 
 add_action( 'after_setup_theme', 'twentytwelve_xilidev_setup', 11 );
-if ( class_exists('xili_language') )  // if temporary disabled
+if ( class_exists('xili_language') )	// if temporary disabled
 	add_action ( 'wp_head', 'special_head', 11);
 
 
@@ -159,7 +167,7 @@ function special_head() {
 	// to change search form of widget
 	// if ( is_front_page() || is_category() || is_search() )
 	if ( is_search() ) {
-	 	add_filter('get_search_form', 'my_langs_in_search_form_2012', 10, 1); // in multilingual-functions.php
+		add_filter('get_search_form', 'my_langs_in_search_form_2012', 10, 1); // in multilingual-functions.php
 	}
 	$xili_theme_options = get_theme_xili_options() ; // see below
 
@@ -169,7 +177,7 @@ function special_head() {
 }
 
 // need to be here not in hook
-add_action( 'customize_preview_init', 'xili_customize_js_footer', 9  ); // before parent 2013 to be in footer
+add_action( 'customize_preview_init', 'xili_customize_js_footer', 9 ); // before parent 2013 to be in footer
 function xili_customize_js_footer () {
 
 	wp_enqueue_script( 'customize-xili-js-footer', get_stylesheet_directory_uri(). '/functions-xili' . '/js/xili_theme_customizer.js' , array( 'customize-preview' ), TWENTYTWELVE_XILI_VER, true );
@@ -181,31 +189,31 @@ function twentytwelve_xilidev_setup_custom_header () {
 	// %2$s = in child
 	register_default_headers( array(
 		'xili2012' => array(
-			'url'           => '%2$s/images/headers/xili-2012.jpg',
+			'url'			=> '%2$s/images/headers/xili-2012.jpg',
 			'thumbnail_url' => '%2$s/images/headers/xili-2012-thumbnail.jpg',
-			'description'   => _x( '2012 by xili', 'header image description', 'twentytwelve' )
+			'description'	=> _x( '2012 by xili', 'header image description', 'twentytwelve' )
 		),
 		'xili2012-2' => array(
-			'url'           => '%2$s/images/headers/xili-2012-2.jpg',
+			'url'			=> '%2$s/images/headers/xili-2012-2.jpg',
 			'thumbnail_url' => '%2$s/images/headers/xili-2012-2-thumbnail.jpg',
-			'description'   => _x( '2012-2 by xili', 'header image description', 'twentytwelve' )
+			'description'	=> _x( '2012-2 by xili', 'header image description', 'twentytwelve' )
 		))
 	);
 
 	$args = array(
 		// Text color and image (empty to use none).
-		'default-text-color'     => '303030', // diff of parent
-		'default-image'          => 'random-default-image', //'%2$s/images/headers/xili-2012.jpg',
+		'default-text-color'	=> '303030', // diff of parent
+		'default-image'			=> 'random-default-image', //'%2$s/images/headers/xili-2012.jpg',
 
 		// Set height and width, with a maximum value for the width.
-		'height'                 => 120,
-		'width'                  => 960,
+		'height'				=> 120,
+		'width'					=> 960,
 
 
 		// Callbacks for styling the header and the admin preview.
-		'wp-head-callback'       => 'twentytwelve_header_style',
-		'admin-head-callback'    => 'twentytwelve_admin_header_style',
-		'admin-preview-callback' => 'twentytwelve_admin_header_image',
+		'wp-head-callback'			=> 'twentytwelve_header_style',
+		'admin-head-callback'		=> 'twentytwelve_admin_header_style',
+		'admin-preview-callback'	=> 'twentytwelve_admin_header_image',
 	);
 
 
@@ -316,7 +324,7 @@ function twentytwelve_flags_style () {
 			$language_xili_settings = get_option('xili_language_settings');
 		}
 
-		$language_slugs_list =  array_keys ( $language_xili_settings['langs_ids_array'] ) ;
+		$language_slugs_list = array_keys ( $language_xili_settings['langs_ids_array'] ) ;
 		$xili_theme_options = get_theme_xili_options() ; // see below
 
 
@@ -330,10 +338,10 @@ function twentytwelve_flags_style () {
 		foreach ( $language_slugs_list as $slug ) {
 			echo "ul.nav-menu li.menu-separator { margin:0; }\n";
 			echo "ul.nav-menu li.lang-{$slug} { background: transparent url('{$path}/images/flags/{$slug}.png') no-repeat center 16px; margin:0;}\n";
-			echo "ul.nav-menu li.lang-{$slug}:hover {background:  transparent url('{$path}/images/flags/{$slug}.png') no-repeat center 17px !important;}\n";
+			echo "ul.nav-menu li.lang-{$slug}:hover {background: transparent url('{$path}/images/flags/{$slug}.png') no-repeat center 17px !important;}\n";
 			$ulmenus[] = "ul.nav-menu li.lang-{$slug} a";
 		}
-			echo implode (', ', $ulmenus ) . " {text-indent:-9999px; width:24px;  }\n";
+			echo implode (', ', $ulmenus ) . " {text-indent:-9999px; width:24px; }\n";
 		?>
 		</style>
 		<?php
@@ -381,7 +389,7 @@ function xiliml_new_list() {
 			$xili_widgets = get_option('widget_xili_language_widgets', array());
 			foreach ( $xili_widgets as $key => $arrprop ) {
 				if ( $key != '_multiwidget' ) {
-					if ( $arrprop['theoption'] == 'typeonenew' ) {  // widget with option for singular
+					if ( $arrprop['theoption'] == 'typeonenew' ) {	// widget with option for singular
 						if ( is_active_widget( false, 'xili_language_widgets-'.$key, 'xili_language_widgets' ) ) return false ;
 					}
 				}
