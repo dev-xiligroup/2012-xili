@@ -18,7 +18,7 @@ function twentytwelve_xilidev_setup () {
 
 	$theme_domain = 'twentytwelve';
 
-	load_theme_textdomain( $theme_domain, STYLESHEETPATH . '/langs' ); // now use .mo of child
+	load_theme_textdomain( $theme_domain, get_stylesheet_directory() . '/langs' ); // now use .mo of child
 
 	$xl_required_version = false;
 
