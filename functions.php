@@ -11,8 +11,9 @@
 // 2013-11-12 - 1.3.1 - as parent version - updated with class of 2.9.10+ - fixes header loop
 // 2014-02-09 - 1.3.2 - as parent version - updated with new class of 2.10.0+
 // 2014-04-11 - 1.4.0 - as parent version - updated with new class of 2.12.0+
+// 2014-11-30 - 1.4.1 - fixes adjacent links
 
-define( 'TWENTYTWELVE_XILI_VER', '1.4.0'); // as style.css
+define( 'TWENTYTWELVE_XILI_VER', '1.4.1'); // as style.css
 
 function twentytwelve_xilidev_setup () {
 
