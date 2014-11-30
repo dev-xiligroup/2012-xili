@@ -15,6 +15,8 @@ After installation or updating, it is fully recommanded to refresh permalinks.
 
 Before updating don't forgot to keep a backup of the current languages files (.mo) in child sub-folder.
 
+Recommendation: after uncompressing the zip, rename the folder without suffix "-master" to obtain "twentytwelve-xili" before to add it in wp-content/themes/ folder!
+
 2014-11-30
 
 M.
