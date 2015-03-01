@@ -3,20 +3,20 @@
 
 Multilingual child theme of Twenty Twelve, one the embedded themes of WordPress : TwentyTwelve-xili v. 1.4.1
 
-Master Branch is reserved for latest version of xili-language 2.15.0
+Master Branch is reserved for latest version of xili-language 2.15.+
 
-This example is visible (and documented) here
+This child example twentytwelve-xili is visible (and documented) here
 
 http://2012.wpmu.xilione.com
 
-After installation or updating, it is fully recommanded to refresh permalinks.
+## Prerequisites:
 
--- a child theme needs his parent theme named twenty twelve --
+1. WordPress 4.x and updated twentytwelve
+1. **a child theme needs his parent theme**
+1. `xili-language` version 2.15.x (with new theme-multilingual-classes and custom flags in media library)
+1. `xili-language` plugin must be activated. The plugin is [available here](http://wordpress.org/plugins/xili-language/)
+1. After installation or updating, it is recommanded to refresh permalinks (and empty the browser cache too)
+1. After decompressing "master" .zip from Github, only upload the folder twentytwelve-xili (near the readme.md) to themes folder , the child-theme files expect to be finally in `wp-content/themes/twentytwelve-xili/`!
+1. Before updating, don’t forget to backup your own `.mo` language files
 
-Before updating don't forgot to keep a backup of the current languages files (.mo) in child sub-folder.
-
-Recommendation: after uncompressing the zip, rename the folder without suffix "-master" to obtain "twentytwelve-xili" before to add it in wp-content/themes/ folder!
-
-2014-11-30
-
-M.
+2015-03-01
