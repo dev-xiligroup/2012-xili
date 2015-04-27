@@ -1,8 +1,8 @@
 <?php
 /**
- * The sidebar containing the front page widget areas.
+ * The sidebar containing the front page widget areas
  *
- * If no active widgets in either sidebar, they will be hidden completely.
+ * If no active widgets are in either sidebar, hide them completely.
  *
  * @package WordPress
  * @subpackage Twenty_Twelve
@@ -17,7 +17,7 @@
  */
 if ( class_exists('xili_language') ) {
 	$options = get_theme_xili_options();
-	$curlang = ( the_curlang() == 'en_us' || the_curlang() == "" ) ? '' : '_'.the_curlang() ;
+	$curlang = ( xili_curlang() == 'en_us' || xili_curlang() == "" ) ? '' : '_'.xili_curlang() ;
 
 	$curlang2 = ( $curlang != '' && !isset( $options['sidebar_'.'sidebar-2'] ) ) ? '' : $curlang ; //display default - no clone
 	$curlang3 = ( $curlang != '' && !isset( $options['sidebar_'.'sidebar-3'] ) ) ? '' : $curlang ; //display default - no clone
@@ -27,6 +27,7 @@ if ( class_exists('xili_language') ) {
 }
 if ( ! is_active_sidebar( 'sidebar-2'. $curlang2 ) && ! is_active_sidebar( 'sidebar-3'. $curlang3 ) )
 	return;
+
 // If we get this far, we have widgets. Let do this.
 ?>
 <div id="secondary" class="widget-area" role="complementary">

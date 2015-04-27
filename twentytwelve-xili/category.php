@@ -4,13 +4,12 @@
  *
  * Used to display archive-type pages for posts in a category.
  *
- * @link http://codex.wordpress.org/Template_Hierarchy
+ * @link https://codex.wordpress.org/Template_Hierarchy
  *
  * @package WordPress
  * @subpackage Twenty_Twelve
  * @since Twenty Twelve 1.0
  */
-
 
 get_header(); ?>
 
@@ -20,12 +19,15 @@ get_header(); ?>
 		<?php if ( have_posts() ) : ?>
 			<header class="archive-header">
 				<h1 class="archive-title"><?php printf( __( 'Category Archives: %s', 'twentytwelve' ), '<span>' . single_cat_title( '', false ) . '</span>' ); ?></h1>
-
-			<?php // translation
-			$category_description = trim(strip_tags(category_description()));
-			if ( ! empty( $category_description ) )
-				echo '<div class="archive-meta"><p>' . translate($category_description,'twentytwelve') . '</p></div>';
-			?>
+				<?php
+					// Show an optional term description.
+					//$term_description = term_description();
+					// 1.3.0 by xili
+					preg_match('/<p>(.*)<\/p>/', term_description(), $match);
+					if ( isset($match[1]) ) :
+						printf( '<div class="archive-meta"><p>%s</p></div>', translate ( $match[1], 'twentytwelve' ) );
+					endif;
+				?>
 			</header><!-- .archive-header -->
 
 			<?php

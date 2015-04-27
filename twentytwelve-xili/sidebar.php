@@ -1,8 +1,8 @@
 <?php
 /**
- * The sidebar containing the main widget area.
+ * The sidebar containing the main widget area
  *
- * If no active widgets in sidebar, let's hide it completely.
+ * If no active widgets are in either sidebar, hide them completely.
  *
  * @package WordPress
  * @subpackage Twenty_Twelve
@@ -10,7 +10,7 @@
  */
 if ( class_exists('xili_language') ) {
 	$options = get_theme_xili_options();
-	$curlang = ( the_curlang() == 'en_us' || the_curlang() == "" ) ? '' : '_'.the_curlang() ;
+	$curlang = ( xili_curlang() == 'en_us' || xili_curlang() == "" ) ? '' : '_'.xili_curlang() ;
 
 		if ( $curlang != '' && !isset( $options['sidebar_'.'sidebar-1'] ) ) $curlang = '' ; //display default - no clone
 	} else {

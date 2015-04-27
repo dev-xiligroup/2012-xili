@@ -1,17 +1,21 @@
-@charset "UTF-8";
+/*
+Theme Name: TwentyTwelve xili
+Theme URI: https://github.com/dev-xiligroup/twentytwelve-xili
+Description: Multilingual Child of TwentyTwelve based but including features for multilingual context with xili-language plugin (v. 2.17.0+) . Sidebar clonable for each language.
+Author: dev.xiligroup.com ms
+Author URI: michelwppi
+Version: 1.7.0
+Tags: child theme, tabs, multilingual, nav menu per language, rare language, rtl, farsi, bbPress, sidebar, light, gray, white, one-column, two-columns, right-sidebar, fluid-layout, responsive-layout, custom-background, custom-header, custom-menu, editor-style, featured-images, flexible-header, full-width-template, microformats, post-formats, rtl-language-support, sticky-post, theme-options, translation-ready
+Text Domain: twentytwelve
+Domain Path: /langs
+Template: twentytwelve
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+*/
 
 /**
- * Theme Name: TwentyTwelve xili
- * Theme URI: http://dev.xiligroup.com/
- * Description: Multilingual Child of TwentyTwelve based but including features for multilingual context with xili-language plugin (v. 2.12.0+) . Sidebar clonable for each language.
- * Author: dev.xiligroup.com ms
- * Author URI: http://dev.xiligroup.com/
- * Version: 1.4.1
- * Tags: child theme, tabs, multilingual, nav menu per language, rare language, rtl, farsi, bbPress, sidebar
- * Template: twentytwelve
- */
-
-/**
+ * 2015-04-27 - 1.7.0 - WP 4.1+ and 2012 v.1.7
  * 2014-11-30 - 1.4.1 - fixes adjacent links
  * 2014-02-09 - 1.4.0 - as parent version - updated with new class of 2.12.0+
  * 2014-02-09 - 1.3.2 - as parent version - updated with new class of 2.10.0+

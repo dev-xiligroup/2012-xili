@@ -12,8 +12,9 @@
 // 2014-02-09 - 1.3.2 - as parent version - updated with new class of 2.10.0+
 // 2014-04-11 - 1.4.0 - as parent version - updated with new class of 2.12.0+
 // 2014-11-30 - 1.4.1 - fixes adjacent links
+// 2015-04-27 - 1.7.0 - WP 4.1+, XL 2.7+
 
-define( 'TWENTYTWELVE_XILI_VER', '1.4.1'); // as style.css
+define( 'TWENTYTWELVE_XILI_VER', '1.7.0'); // as style.css
 
 function twentytwelve_xilidev_setup () {
 
@@ -23,7 +24,7 @@ function twentytwelve_xilidev_setup () {
 
 	$xl_required_version = false;
 
-	$minimum_xl_version = '2.11.99';
+	$minimum_xl_version = '2.16.99';
 
 	if ( class_exists('xili_language') ) { // if temporary disabled
 
@@ -157,6 +158,17 @@ if ( class_exists('xili_language') )	// if temporary disabled
 
 
 /**
+ * add search other languages in form - see functions.php when fired
+ *
+ */
+function my_langs_in_search_form_2012 ( $the_form ) {
+
+	$form = str_replace ( '</form>', '', $the_form ) . '<span class="xili-s-radio">' . xiliml_langinsearchform ( $before='<span class="radio-lang">', $after='</span>', false) . '</span>';
+	$form .= '</form>';
+	return $form ;
+}
+
+/**
  * define when search form is completed by radio buttons to sub-select language when searching
  *
  */
@@ -254,6 +266,60 @@ function twentytwelve_reset_default_theme_value ( $theme ) {
 	set_theme_mod( 'background_image_thumb', get_stylesheet_directory_uri() . '/images/background-2012-thumbnail.jpg');
 
 }
+
+
+// for xili
+function twentytwelve_xili_header_image () {
+
+	$header_image_url = get_header_image();
+
+	$text_color = get_header_textcolor();
+
+	// If no custom options for text are set, let's bail.
+	if ( empty( $header_image_url ) )
+		return;
+
+	// If we get this far, we have custom styles.
+
+		if ( ! empty( $header_image_url ) ) :
+			$header_image_width = get_custom_header()->width; // default values
+			$header_image_height = get_custom_header()->height;
+			if ( class_exists ( 'xili_language' ) ) {
+				$xili_theme_options = get_theme_xili_options() ;
+				if ( isset ( $xili_theme_options['xl_header'] ) && $xili_theme_options['xl_header'] ) {
+				global $xili_language, $xili_language_theme_options ;
+				// check if image exists in current language
+				// 2013-10-10 - Tiago suggestion
+				$curlangslug = ( '' == the_curlang() ) ? strtolower( $xili_language->default_lang ) : the_curlang() ;
+
+
+					$headers = get_uploaded_header_images(); // search in uploaded header list
+
+					$this_default_headers = $xili_language_theme_options->get_processed_default_headers () ;
+					if ( ! empty( $this_default_headers ) ) {
+						$headers = array_merge( $this_default_headers, $headers );
+					}
+					foreach ( $headers as $header_key => $header ) {
+
+						if ( isset ( $xili_theme_options['xl_header_list'][$curlangslug] ) && $header_key == $xili_theme_options['xl_header_list'][$curlangslug] ) {
+							$header_image_url = $header['url'];
+
+							$header_image_width = ( isset($header['width']) ) ? $header['width']: get_custom_header()->width;
+							$header_image_height = ( isset($header['height']) ) ? $header['height']: get_custom_header()->height; // not in default (but in uploaded)
+
+							break ;
+						}
+					}
+				}
+			}
+		?>
+		<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
+			<img src="<?php echo $header_image_url; ?>" class="header-image" width="<?php echo $header_image_width; ?>" height="<?php echo $header_image_height; ?>" alt="" />
+		</a>
+
+		<?php endif;
+}
+
 
 add_action( 'after_switch_theme', 'twentytwelve_reset_default_theme_value' );
 
